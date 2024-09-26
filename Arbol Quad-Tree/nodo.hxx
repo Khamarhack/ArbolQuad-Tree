@@ -1,160 +1,117 @@
 #include "Nodo.h"
-#include <bits/stdc++.h>
-
-using namespace std;
 
 template<class T>
-Nodo<T>::Nodo()
-{
-
-    this->NW = NULL;
-    this->NE = NULL;
-    this->SW = NULL;
-    this->SE = NULL;
+Nodo<T>::Nodo() {
+    this->NW = nullptr;
+    this->NE = nullptr;
+    this->SW = nullptr;
+    this->SE = nullptr;
 }
 
 template<class T>
-Nodo<T>::Nodo(pair<T,T> val)
-{
+Nodo<T>::Nodo(std::pair<T, T> val) {
     this->dato = val;
-    this->NW = NULL;
-    this->NE = NULL;
-    this->SW = NULL;
-    this->SE = NULL;
+    this->NW = nullptr;
+    this->NE = nullptr;
+    this->SW = nullptr;
+    this->SE = nullptr;
 }
 
-
 template<class T>
-pair<T,T> Nodo<T>::obtenerDato()
-{
+std::pair<T, T> Nodo<T>::obtenerDato() {
     return this->dato;
 }
 
 template<class T>
-void Nodo<T>::fijarDato(pair<T,T> val)
-{
+void Nodo<T>::fijarDato(std::pair<T, T> val) {
     this->dato = val;
-    return;
 }
 
 template<class T>
-int Nodo<T>::altura()
-{
-    if(NW == NULL && NE == NULL && SW == NULL && SE == NULL )
+int Nodo<T>::altura() {
+    if (NW == nullptr && NE == nullptr && SW == nullptr && SE == nullptr)
         return 1;
 
-    int mayor=0,actual;
-    if(NW != NULL)
-    {
-        actual= this->NW->altura()+1;
-        if(actual>mayor)
-            mayor=actual;
+    int mayor = 0, actual;
+    if (NW != nullptr) {
+        actual = this->NW->altura() + 1;
+        if (actual > mayor)
+            mayor = actual;
     }
-    if(NE != NULL)
-    {
-        actual = this->NE->altura()+1;
-        if(actual>mayor)
-            mayor=actual;
+    if (NE != nullptr) {
+        actual = this->NE->altura() + 1;
+        if (actual > mayor)
+            mayor = actual;
     }
-    if(SW != NULL)
-    {
-        actual = this->SW->altura()+1;
-        if(actual>mayor)
-            mayor=actual;
+    if (SW != nullptr) {
+        actual = this->SW->altura() + 1;
+        if (actual > mayor)
+            mayor = actual;
     }
-    if(SE != NULL)
-    {
-        actual = this->SE->altura()+1;
-        if(actual>mayor)
-            mayor=actual;
+    if (SE != nullptr) {
+        actual = this->SE->altura() + 1;
+        if (actual > mayor)
+            mayor = actual;
     }
+
+    return mayor;
 }
 
-
 template<class T>
-int Nodo<T>::tamano()
-{
-    if(NW == NULL && NE == NULL && SW == NULL && SE == NULL )
+int Nodo<T>::tamano() {
+    if (NW == nullptr && NE == nullptr && SW == nullptr && SE == nullptr)
         return 1;
 
-    int cont=0;
-    if(NW != NULL)
-    {
-        cont+= this->NW->altura()+1;
-    }
-    if(NE != NULL)
-    {
-        cont+= this->NE->altura()+1;
-    }
-    if(SW != NULL)
-    {
-        cont+= this->SW->altura()+1;
-    }
-    if(SE != NULL)
-    {
-        cont+= this->SE->altura()+1;
-    }
+    int cont = 1;  // Contamos el nodo actual
+    if (NW != nullptr)
+        cont += this->NW->tamano();
+    if (NE != nullptr)
+        cont += this->NE->tamano();
+    if (SW != nullptr)
+        cont += this->SW->tamano();
+    if (SE != nullptr)
+        cont += this->SE->tamano();
+
     return cont;
 }
 
 template<class T>
-void Nodo<T>:: insertar(pair<T,T> val)
-{
-    /*Norte*/
-    if(this->dato.first < val.first)
-    {
-        if(this->dato.second < val.second)
-        {
-            if(this->NE!= NULL)
-            {
+void Nodo<T>::insertar(std::pair<T, T> val) {
+    /* Norte */
+    if (this->dato.first < val.first) {
+        if (this->dato.second < val.second) {
+            if (this->NE != nullptr) {
                 this->NE->insertar(val);
-            }
-            else
-            {
+            } else {
                 Nodo<T>* nuevo = new Nodo();
                 nuevo->fijarDato(val);
                 this->NE = nuevo;
             }
-        }
-        else
-        {
-            if(this->SE!= NULL)
-            {
+        } else {
+            if (this->SE != nullptr) {
                 this->SE->insertar(val);
-            }
-            else
-            {
+            } else {
                 Nodo<T>* nuevo = new Nodo();
                 nuevo->fijarDato(val);
                 this->SE = nuevo;
             }
         }
     }
-
-    /*Sur*/
-    if(this->dato.first > val.first )
-    {
-        if(this->dato.second < val.second)
-        {
-            if(this->NW!= NULL)
-            {
+    
+    /* Sur */
+    if (this->dato.first > val.first) {
+        if (this->dato.second < val.second) {
+            if (this->NW != nullptr) {
                 this->NW->insertar(val);
-            }
-            else
-            {
+            } else {
                 Nodo<T>* nuevo = new Nodo();
                 nuevo->fijarDato(val);
                 this->NW = nuevo;
             }
-        }
-        else
-        {
-            if(this->SW!= NULL)
-            {
+        } else {
+            if (this->SW != nullptr) {
                 this->SW->insertar(val);
-            }
-            else
-            {
+            } else {
                 Nodo<T>* nuevo = new Nodo();
                 nuevo->fijarDato(val);
                 this->SW = nuevo;
@@ -164,105 +121,68 @@ void Nodo<T>:: insertar(pair<T,T> val)
 }
 
 template<class T>
-Nodo<T>* Nodo<T>:: buscar(pair<T,T> val)
-{
-    if(this->dato == val)
+Nodo<T>* Nodo<T>::buscar(std::pair<T, T> val) {
+    if (this->dato == val)
         return this;
-    if(NW == NULL && NE == NULL && SW == NULL && SE == NULL )
-        return NULL;
+    if (NW == nullptr && NE == nullptr && SW == nullptr && SE == nullptr)
+        return nullptr;
 
-    if(this->dato.first < val.first)
-    {
-        if(this->dato.second < val.second)
-        {
-            if(this->NE!= NULL)
-            {
+    if (this->dato.first < val.first) {
+        if (this->dato.second < val.second) {
+            if (this->NE != nullptr)
                 return this->NE->buscar(val);
-            }
             else
-            {
-                return NULL;
-            }
-        }
-        else
-        {
-            if(this->SE!= NULL)
-            {
+                return nullptr;
+        } else {
+            if (this->SE != nullptr)
                 return this->SE->buscar(val);
-            }
             else
-            {
-                return NULL;
-            }
+                return nullptr;
         }
     }
 
-    /*Sur*/
-    if(this->dato.first > val.first )
-    {
-        if(this->dato.second < val.second)
-        {
-            if(this->NW!= NULL)
-            {
+    if (this->dato.first > val.first) {
+        if (this->dato.second < val.second) {
+            if (this->NW != nullptr)
                 return this->NW->buscar(val);
-            }
             else
-            {
-                return NULL;
-            }
-        }
-        else
-        {
-            if(this->SW!= NULL)
-            {
+                return nullptr;
+        } else {
+            if (this->SW != nullptr)
                 return this->SW->buscar(val);
-            }
             else
-            {
-                return NULL;
-            }
+                return nullptr;
         }
     }
 
-    return NULL;
-
+    return nullptr;
 }
 
 template<class T>
-void Nodo<T>:: preOrden()
-{
-    cout << "("<<this->dato.first<<','<<this->dato.second <<")"<< endl;
-    if(this->NW !=NULL)
+void Nodo<T>::preOrden() {
+    std::cout << "(" << this->dato.first << ',' << this->dato.second << ")" << std::endl;
+    if (this->NW != nullptr)
         this->NW->preOrden();
-    if(this->NE !=NULL)
+    if (this->NE != nullptr)
         this->NE->preOrden();
-    if(this->SW !=NULL)
+    if (this->SW != nullptr)
         this->SW->preOrden();
-    if(this->SE !=NULL)
+    if (this->SE != nullptr)
         this->SE->preOrden();
-
-    return;
 }
 
-
-
-
-
 template<class T>
-void Nodo<T>:: posOrden()
-{
-    if(this->NW !=NULL)
-        this->NW->preOrden();
-    if(this->NE !=NULL)
-        this->NE->preOrden();
-    if(this->SW !=NULL)
-        this->SW->preOrden();
-    if(this->SE !=NULL)
-        this->SE->preOrden();
+void Nodo<T>::posOrden() {
+    if (this->NW != nullptr)
+        this->NW->posOrden();
+    if (this->NE != nullptr)
+        this->NE->posOrden();
+    if (this->SW != nullptr)
+        this->SW->posOrden();
+    if (this->SE != nullptr)
+        this->SE->posOrden();
 
-    cout << "("<<this->dato.first<<','<<this->dato.second <<")"<< endl;
-    return;
-
+    std::cout << "(" << this->dato.first << ',' << this->dato.second << ")" << std::endl;
 }
 
 
