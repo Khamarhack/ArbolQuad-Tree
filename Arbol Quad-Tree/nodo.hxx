@@ -9,7 +9,7 @@ Nodo<T>::Nodo() {
 }
 
 template<class T>
-Nodo<T>::Nodo(std::pair<T, T> val) {
+Nodo<T>::Nodo(pair<T, T> val) {
     this->dato = val;
     this->NW = nullptr;
     this->NE = nullptr;
@@ -18,12 +18,12 @@ Nodo<T>::Nodo(std::pair<T, T> val) {
 }
 
 template<class T>
-std::pair<T, T> Nodo<T>::obtenerDato() {
+pair<T, T> Nodo<T>::obtenerDato() {
     return this->dato;
 }
 
 template<class T>
-void Nodo<T>::fijarDato(std::pair<T, T> val) {
+void Nodo<T>::fijarDato(pair<T, T> val) {
     this->dato = val;
 }
 
@@ -76,7 +76,7 @@ int Nodo<T>::tamano() {
 }
 
 template<class T>
-void Nodo<T>::insertar(std::pair<T, T> val) {
+void Nodo<T>::insertar(pair<T, T> val) {
     /* Norte */
     if (this->dato.first < val.first) {
         if (this->dato.second < val.second) {
@@ -121,7 +121,7 @@ void Nodo<T>::insertar(std::pair<T, T> val) {
 }
 
 template<class T>
-Nodo<T>* Nodo<T>::buscar(std::pair<T, T> val) {
+Nodo<T>* Nodo<T>::buscar(pair<T, T> val) {
     if (this->dato == val)
         return this;
     if (NW == nullptr && NE == nullptr && SW == nullptr && SE == nullptr)
@@ -160,7 +160,7 @@ Nodo<T>* Nodo<T>::buscar(std::pair<T, T> val) {
 
 template<class T>
 void Nodo<T>::preOrden() {
-    std::cout << "(" << this->dato.first << ',' << this->dato.second << ")" << std::endl;
+    cout << "(" << this->dato.first << ',' << this->dato.second << ")" << endl;
     if (this->NW != nullptr)
         this->NW->preOrden();
     if (this->NE != nullptr)
@@ -182,9 +182,8 @@ void Nodo<T>::posOrden() {
     if (this->SE != nullptr)
         this->SE->posOrden();
 
-    std::cout << "(" << this->dato.first << ',' << this->dato.second << ")" << std::endl;
+    cout << "(" << this->dato.first << ',' << this->dato.second << ")" << endl;
 }
-
 
 
 
