@@ -1,3 +1,9 @@
+/*******************************************
+Fecha: 1 octubre 2024
+Autor: Santiago Camargo
+Tema: Taller Arboles
+Estructuras de datos
+******************************************/
 #include "Nodo.h"
 
 template<class T>
