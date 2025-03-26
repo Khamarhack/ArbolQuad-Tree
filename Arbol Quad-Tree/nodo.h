@@ -1,5 +1,5 @@
 /*******************************************
-Fecha: 1 abril 2025
+Fecha: 26 marzo 2025
 Autor: Santiago Camargo
 Tema: Taller Arboles
 Estructuras de datos
