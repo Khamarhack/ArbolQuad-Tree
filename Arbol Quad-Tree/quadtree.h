@@ -1,7 +1,7 @@
 /*******************************************
 Fecha: 26 marzo 2025
 Autor: Santiago Camargo
-Tema: Taller Arboles
+Tema: Taller Árboles
 Estructuras de datos
 ******************************************/
 #ifndef __QUADTREE__H__
@@ -13,20 +13,30 @@ using namespace std;
 
 template<class T>
 class Arbol {
-  protected:
-    Nodo<T> *raiz;
-  public:
-	Arbol();
-	Arbol(pair<T,T> val);
+protected:
+    Nodo<T>* raiz;
+
+public:
+    // Constructores
+    Arbol();
+    Arbol(pair<T, T> val);
+
+    // Destructor para liberar memoria
+    ~Arbol();
+
+    // Métodos de acceso
     bool esVacio();
-    pair<T,T> obtenerRaiz();
+    Nodo<T>* obtenerRaiz();
     void fijarRaiz(Nodo<T>* root);
-    void insertar(pair<T,T>);
+
+    // Operaciones del árbol
+    void insertar(pair<T, T> val);
+    bool eliminar(pair<T, T> val);
+    Nodo<T>* buscar(pair<T, T> val);
     int altura();
     int tamano();
-    void insertar(T& val);
-    bool eliminar(T& val);
-    Nodo<T>*  buscar(pair<T,T> val);
+
+    // Recorridos
     void preOrden();
     void posOrden();
 };
